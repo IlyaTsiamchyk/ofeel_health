@@ -67,3 +67,9 @@ staticfiles/
 
 .cache/
 
+/.vs
+/ofeel.pyproj
+/bin
+/obj/Debug
+/ofeel.sln
+/ofeel.pyproj.user

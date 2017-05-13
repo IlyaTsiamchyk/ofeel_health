@@ -1,4 +1,4 @@
-"""
+﻿"""
 Django settings for ofeel project.
 
 For more information on this file, see
@@ -37,6 +37,7 @@ DJANGO_APPS = [
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 
     # Useful template tags:
     # 'django.contrib.humanize',
@@ -56,6 +57,7 @@ LOCAL_APPS = [
     # custom users app
     'diet_creator.users.apps.UsersConfig',
     # Your stuff: custom apps go here
+    'diet_creator.health_calc.apps.HealthCalcConfig',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -109,7 +111,7 @@ MANAGERS = ADMINS
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres://localhost/diet_creator'),
+    'default': env.db('DATABASE_URL', default='postgres://postgres:123qweasd@127.0.0.1/ofeel'),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 

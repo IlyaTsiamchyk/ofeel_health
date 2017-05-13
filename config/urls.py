@@ -1,4 +1,4 @@
-from django.conf import settings
+﻿from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
 
     # Your stuff: custom urls includes go here
+    url(r'^ofeel/', include('diet_creator.health_calc.urls', namespace='health_calc')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

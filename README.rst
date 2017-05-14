@@ -21,6 +21,21 @@ Moved to settings_.
 Basic Commands
 --------------
 
+Building configuration
+^^^^^^^^^^^^^^^^^^^^^^
+Install npm packages:
+
+npm install
+
+Install the requirements for your local development:
+
+$ pip install -r requirements/local.txt
+
+You can now run the usual Django migrate and runserver commands:
+
+$ python manage.py migrate
+$ python manage.py runserver
+
 Setting Up Your Users
 ^^^^^^^^^^^^^^^^^^^^^
 

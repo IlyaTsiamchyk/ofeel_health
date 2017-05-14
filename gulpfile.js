@@ -1,4 +1,4 @@
-
+﻿
 ////////////////////////////////
 		//Setup//
 ////////////////////////////////
@@ -19,7 +19,9 @@ var gulp = require('gulp'),
       exec = require('child_process').exec,
       runSequence = require('run-sequence'),
       browserSync = require('browser-sync').create(),
-      reload = browserSync.reload;
+      reload = browserSync.reload,
+      componentsTask = require('./gulp_tasks/components');
+
 
 
 // Relative paths function
@@ -43,6 +45,8 @@ var paths = pathsConfig();
 		//Tasks//
 ////////////////////////////////
 
+gulp.task('componentsTask', componentsTask);
+
 // Styles autoprefixing and minification
 gulp.task('styles', function() {
   return gulp.src(paths.sass + '/project.scss')
@@ -62,7 +66,7 @@ gulp.task('scripts', function() {
     .pipe(plumber()) // Checks for errors
     .pipe(uglify()) // Minifies the js
     .pipe(rename({ suffix: '.min' }))
-    .pipe(gulp.dest(paths.js));
+    .pipe(gulp.dest(paths.js + '/dist'));
 });
 
 // Image compression
@@ -95,10 +99,12 @@ gulp.task('watch', function() {
   gulp.watch(paths.js + '/*.js', ['scripts']).on("change", reload);
   gulp.watch(paths.images + '/*', ['imgCompression']);
   gulp.watch(paths.templates + '/**/*.html').on("change", reload);
+  gulp.watch(paths.js + '/*.jsx', ['componentsTask']);
+  gulp.watch(paths.js + '/*.js', ['componentsTask']);
 
 });
 
 // Default task
 gulp.task('default', function() {
-    runSequence(['styles', 'scripts', 'imgCompression'], 'runServer', 'browserSync', 'watch');
+    runSequence(['componentsTask', 'styles', 'scripts', 'imgCompression'], 'runServer', 'browserSync', 'watch');
 });

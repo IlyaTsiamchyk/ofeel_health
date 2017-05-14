@@ -43,6 +43,33 @@ $red: #b94a48;
   border-radius: 0px;
 }
 
+.category {
+    width: 200px;
+    height: 200px;
+    background-color: springgreen;
+    border-radius: 100px;
+    float: right;
+    margin: 20px 114px;
+    padding: 90px 0;
+    text-align: center;
+    font-size: 24px;
+}
+
+.add_button {
+  margin: 50px 0 100px 155px;
+}
+
+.add_button button {
+  background-color: yellowgreen !important;
+}
+
+.negative_preferences {
+  display: none;
+}
+
+.client-info {
+  padding-left: 120px;
+}
 @media (max-width: 47.9em) {
   .navbar-nav .nav-item {
     display: inline-block;

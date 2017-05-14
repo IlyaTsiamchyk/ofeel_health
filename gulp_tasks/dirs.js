@@ -1,4 +1,4 @@
-var projectRoot = './ofeel/static'
+var projectRoot = './diet_creator/static'
 
 var dirs = {
     projectRoot: projectRoot,

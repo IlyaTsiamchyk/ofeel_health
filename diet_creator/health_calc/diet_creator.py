@@ -1,4 +1,6 @@
-import copy
+﻿import copy
+import operator
+import random
 
 VALUE_WEIGHTS = {
     'proteinsNumber': 1.2
@@ -13,12 +15,8 @@ def create_diet(dishes, food_types, body_features):
     left_body_requirements = copy.copy(AVERAGE_BODY_REQUIREMENTS)
 
     requirements_weights = get_requirements_weights(AVERAGE_BODY_REQUIREMENTS, left_body_requirements)
-    sutisfied_dishes = find_dishes_with_max_requirement(requirements_weights)
-
-    count_use_value(dishes[0], left_body_requirements, AVERAGE_BODY_REQUIREMENTS)
-
-    dish_to_eat = get_dish(sutisfied_dishes)
-
+    dish_to_eat = get_dish(dishes, requirements_weights)
+    
     diet.update(dish_to_eat)
     freese_dishes.update(dish_to_eat)
     update_weights()
@@ -26,15 +24,12 @@ def create_diet(dishes, food_types, body_features):
     return diet
 
 
-def count_use_value(dish, requirements_left, total_requirements):
-    temp_value_weights = get_temp_weights(requirements_left, total_requirements)
-
-    test = dish.proteinsNumber * temp_value_weights['proteinsNumber']
-    requirements_left['proteinsNumber'] = requirements_left['proteinsNumber'] - 10
-
 def get_body_requirements(body_features):
     BODY_REQUIREMENTS = {
-        'proteinsNumber': 100
+        'proteinsNumber': 100,
+        'lipidsNumber': 100,
+        #'carbohydratesNumber': 100,
+        'energyValue': 1000
     }
     #TODO: add personal height etc counting
 
@@ -42,39 +37,57 @@ def get_body_requirements(body_features):
 
 
 def get_requirements_weights(average_requirements, requirements):
-    return {}
+    requirements_weights = {}
+
+    for key in requirements:
+        requirements_weights[key] = requirements[key] / average_requirements[key]
+
+    return sorted(requirements_weights.items(), key=operator.itemgetter(1), reverse=True)
 
 
-def find_dishes_with_max_requirement(requirements_weights):
-    max_requirement = find_max_requirement(requirements_weights)
-    return {}
-
-
-def find_max_requirement(requirements_weights):
-    return {}
-
-
-def get_dish_weight(dish):
-    return 0
-
-
-def get_dish(sutisfied_dishes):
-    weights = {}
+def get_dish(dishes, requirements_weights):    
+    sutisfied_dishes = find_most_required_dishes(dishes, requirements_weights)
+    
+    values = []
+    weights = []
 
     for i in range(len(sutisfied_dishes)):
-        weights[i] = get_dish_weight(sutisfied_dishes[i])
+        values.append((i, get_dish_value(sutisfied_dishes[i], requirements_weights)))
 
-    # dish = colony.choose_way()
-    return {}
+    dish_number = weighted_choice(values)
+
+    return dish[dish_number]
 
 
-def get_temp_weights(requirements_left, total_requirements):
-    temp_value_weights = copy.copy(VALUE_WEIGHTS)
+def find_most_required_dishes(dishes, requirements_weights):
+    num_to_select = 2
+    most_required_element = requirements_weights[0][0]
 
-    for key in temp_value_weights:
-        temp_value_weights[key] = temp_value_weights[key] + requirements_left[key] / total_requirements[key]
+    most_required_dishes = sorted(dishes, key=operator.attrgetter(most_required_element), reverse=True)[:100]
+    
+    return random.sample(most_required_dishes, num_to_select)
 
-    return temp_value_weights
+
+def get_dish_value(dish, requirements_weights):
+    value = 0
+
+    #TODO: Add ferromons counting
+    for key, val in requirements_weights:
+        value += getattr(dish, str(key)) * val
+
+    return value
+
+
+def weighted_choice(choices):
+   total = sum(w for c, w in choices)
+   r = random.uniform(0, total)
+   upto = 0
+   for c, w in choices:
+      if upto + w >= r:
+         return c
+      upto += w
+   assert False, "Shouldn't get here"
+
 
 def update_weights():
     pass

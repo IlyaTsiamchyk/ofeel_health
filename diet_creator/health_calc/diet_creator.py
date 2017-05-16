@@ -3,7 +3,7 @@ import operator
 import random
 
 VALUE_WEIGHTS = {
-    'proteinsNumber': 1.2
+    'proteins': 1.2
 }
 
 
@@ -26,10 +26,10 @@ def create_diet(dishes, food_types, body_features):
 
 def get_body_requirements(body_features):
     BODY_REQUIREMENTS = {
-        'proteinsNumber': 100,
-        'lipidsNumber': 100,
-        #'carbohydratesNumber': 100,
-        'energyValue': 1000
+        'proteins': 100,
+        'lipids': 100,
+        'carbohydrates': 100,
+        'energy': 1000
     }
     #TODO: add personal height etc counting
 
@@ -71,9 +71,9 @@ def find_most_required_dishes(dishes, requirements_weights):
 def get_dish_value(dish, requirements_weights):
     value = 0
 
-    #TODO: Add ferromons counting
+    #TODO: Add pheromones counting
     for key, val in requirements_weights:
-        value += getattr(dish, str(key)) * val
+        value += getattr(dish, str(key)) * val * 1
 
     return value
 

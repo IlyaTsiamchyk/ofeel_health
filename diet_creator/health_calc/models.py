@@ -1,4 +1,4 @@
-from django.db import models
+﻿from django.db import models
 from bitfield import BitField
 
 # Create your models here.
@@ -23,9 +23,10 @@ class FoodCategory(models.Model): #steamed, fried, boiled
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
-    proteinsNumber = models.IntegerField(default=0) #gramm
-    lipidsNumber = models.IntegerField(default=0) #gramm
-    energyValue = models.IntegerField(default=0) #kal
+    proteins = models.IntegerField(default=0) #gramm
+    lipids = models.IntegerField(default=0) #gramm
+    carbohydrates = models.IntegerField(default=0) #gramm
+    energy = models.IntegerField(default=0) #kal
     cost = models.DecimalField(decimal_places=4, max_digits=100, default=0)
 
     def __str__(self):
@@ -58,13 +59,14 @@ class Dish(models.Model):
     products = models.ManyToManyField(Product)
 
     name = models.CharField(max_length=200)
-    is_main = models.BooleanField(default=False)
+    is_main = models.BooleanField("Is main", default=False)
     eating_time = BitField(flags=EATING_TIME_CHOICES)
     serve_type = BitField(flags=SERVE_TYPE, default=None)
 
-    proteinsNumber = models.IntegerField(default=0) #gramm
-    lipidsNumber = models.IntegerField(default=0) #gramm
-    energyValue = models.IntegerField(default=0) #kal
+    proteins = models.IntegerField(default=0) #gramm
+    lipids = models.IntegerField(default=0) #gramm
+    carbohydrates = models.IntegerField(default=0) #gramm
+    energy = models.IntegerField(default=0) #kal
     cost = models.DecimalField(decimal_places=4, max_digits=100, default=0)
 
     def __str__(self):
@@ -76,3 +78,19 @@ class Dish(models.Model):
     class Meta:
         verbose_name = "Dish"
         verbose_name_plural = "Dishes"
+
+
+class DishesCompabilities(models.Model):
+    """The way to store compabilities matrix in db."""
+
+    first_dish = models.ForeignKey(Dish, related_name='%(class)s_first_dish')
+    second_dish = models.ForeignKey(Dish, related_name='%(class)s_second_dish')
+    value = models.IntegerField(default=50)
+
+
+class DishesPheromones(models.Model):
+    """The way to store pheromones matrix in db."""
+
+    first_dish = models.ForeignKey(Dish, related_name='%(class)s_first_dish')
+    second_dish = models.ForeignKey(Dish, related_name='%(class)s_second_dish')
+    value = models.IntegerField(default=50)

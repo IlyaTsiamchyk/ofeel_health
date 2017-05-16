@@ -1,8 +1,8 @@
-from django.contrib import admin
+﻿from django.contrib import admin
 from bitfield import BitField
 from bitfield.forms import BitFieldCheckboxSelectMultiple
 
-from .models import Dish, Product, FoodCategory, FoodType
+from .models import Dish, Product, FoodCategory, FoodType, DishesCompabilities
 
 class DishAdmin(admin.ModelAdmin):
     formfield_overrides = {
@@ -15,3 +15,4 @@ admin.site.register(Dish, DishAdmin)
 admin.site.register(Product)
 admin.site.register(FoodCategory)
 admin.site.register(FoodType)
+admin.site.register(DishesCompabilities)

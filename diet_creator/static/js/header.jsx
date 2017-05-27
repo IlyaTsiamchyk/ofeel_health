@@ -34,6 +34,7 @@ var Header = React.createClass({
 					<AppBar
 						iconElementRight={this.getRightIcon()}
 						title="OFeel"
+						className="appbar"
 					/>
 				</MuiThemeProvider>
 			</div>

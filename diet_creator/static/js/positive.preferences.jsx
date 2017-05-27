@@ -46,7 +46,7 @@ var PositivePreferences = React.createClass({
 
 	render: function () {
 		return (
-			<div>
+			<div className="positive-preferences">
 				{this.getCategories()}
 				{this.getAddButton()}
 				{this.getRestrictionsButton()}

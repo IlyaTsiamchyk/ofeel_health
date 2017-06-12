@@ -7,18 +7,19 @@ VALUE_WEIGHTS = {
 }
 
 
-def create_diet(dishes, food_types, body_features):
-    diet = {}
-    freese_dishes = {}
+def create_diet(dishes, food_types, body_features, dishes_compabilities):
+    diet = []
+    freese_dishes = []
+    previous_dish = None
     
     AVERAGE_BODY_REQUIREMENTS = get_body_requirements(body_features)
     left_body_requirements = copy.copy(AVERAGE_BODY_REQUIREMENTS)
 
     requirements_weights = get_requirements_weights(AVERAGE_BODY_REQUIREMENTS, left_body_requirements)
-    dish_to_eat = get_dish(dishes, requirements_weights)
+    dish_to_eat = get_dish(dishes, requirements_weights, dishes_compabilities, previous_dish)
     
-    diet.update(dish_to_eat)
-    freese_dishes.update(dish_to_eat)
+    diet.append(dish_to_eat)
+    freese_dishes.append(dish_to_eat)
     update_weights()
 
     return diet
@@ -45,7 +46,7 @@ def get_requirements_weights(average_requirements, requirements):
     return sorted(requirements_weights.items(), key=operator.itemgetter(1), reverse=True)
 
 
-def get_dish(dishes, requirements_weights):    
+def get_dish(dishes, requirements_weights, dishes_compabilities, previous_dish):    
     sutisfied_dishes = find_most_required_dishes(dishes, requirements_weights)
     
     values = []
@@ -56,7 +57,7 @@ def get_dish(dishes, requirements_weights):
 
     dish_number = weighted_choice(values)
 
-    return dish[dish_number]
+    return sutisfied_dishes[dish_number]
 
 
 def find_most_required_dishes(dishes, requirements_weights):

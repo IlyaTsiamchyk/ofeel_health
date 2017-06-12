@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404, render, get_list_or_404
 from django.utils import timezone
 
 from diet_creator.health_calc.serializers import FoodTypeSerializer, FoodCategorySerializer
-from diet_creator.health_calc.models import Dish, FoodType, FoodCategory
+from diet_creator.health_calc.models import Dish, FoodType, FoodCategory, DishesCompabilities
 from diet_creator.health_calc.diet_creator import *
 
 class TypeViewSet(viewsets.ModelViewSet):
@@ -31,17 +31,20 @@ def rest(request, format=None):
     data = json.loads(json_data)
 
     db_dishes = list(get_list_or_404(Dish, food_type__name = data['type']))
-    dishes = json.dumps([dish.name for dish in db_dishes])
+    dishes_compabilities = list(DishesCompabilities.objects.all())
+    # dishes = json.dumps([dish.name for dish in db_dishes])
 
-    create_diet(db_dishes, 0, data['bodyInfo'])
-    return Response({'dishes': dishes})
+    result_dishes = create_diet(db_dishes, 0, data['bodyInfo'], dishes_compabilities)
+    serialized_dishes = [dish.name for dish in result_dishes]
+
+    return Response({'dishes': json.dumps(serialized_dishes)})
 
 def getTestJson():
     data = {}
-    data['category'] = "Boiled"
-    data['type'] = "Raw"
-    data['positivePreferencies'] = [("Dill", 2), ("Parsley", 4)]
-    data['negativePreferencies'] = [("Parsley", 3)]
+    data['category'] = "boiled"
+    data['type'] = "raw"
+    data['positivePreferencies'] = [("dill", 2), ("parsley", 4)]
+    data['negativePreferencies'] = [("parsley", 3)]
     data['bodyInfo'] = getTestBodyInfo()
 
     return json.dumps(data)

@@ -16,8 +16,8 @@ class User(AbstractUser):
     weight = models.DecimalField(_('Weight'), decimal_places=4, max_digits=100, default=0)
     height = models.DecimalField(_('Height'), decimal_places=4, max_digits=100, default=0)
     sex = models.CharField(max_length=1, choices = (
-            (0, 'Male'),
-            (1, 'Female')
+            ('m', 'Male'),
+            ('f', 'Female')
         ),
         default = 0)
     birth_date = models.DateField(_('Birth date'), default=timezone.now)

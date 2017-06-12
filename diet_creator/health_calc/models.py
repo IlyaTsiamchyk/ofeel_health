@@ -83,14 +83,24 @@ class Dish(models.Model):
 class DishesCompabilities(models.Model):
     """The way to store compabilities matrix in db."""
 
+    name = models.CharField(max_length=200, null=True, blank=True)
+
     first_dish = models.ForeignKey(Dish, related_name='%(class)s_first_dish')
     second_dish = models.ForeignKey(Dish, related_name='%(class)s_second_dish')
     value = models.IntegerField(default=50)
+
+    def __str__(self):
+        return self.name
 
 
 class DishesPheromones(models.Model):
     """The way to store pheromones matrix in db."""
 
+    name = models.CharField(max_length=200, default="", null=True)
+
     first_dish = models.ForeignKey(Dish, related_name='%(class)s_first_dish')
     second_dish = models.ForeignKey(Dish, related_name='%(class)s_second_dish')
     value = models.IntegerField(default=50)
+    
+    def __str__(self):
+        return self.name

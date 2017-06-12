@@ -369,3 +369,125 @@ $darkred: #49a942;
       }
   }
   }
+
+
+  //calories
+
+  .calories-wrap {
+    width: 50%;
+    margin: 30px 25%;
+    border: 1px solid black;
+    
+
+    .title {
+      min-height: 70px;
+      font-size: 30px;
+      text-align: center;
+          padding-top: 10px;
+    }
+
+    .item {
+       min-height: 50px;
+        font-size: 20px;
+            border-top: 1px solid black;
+            padding-top: 7px;
+                padding-left: 30px;
+    }
+
+    .bold {
+      font-size: 25px;
+      font-weight: bold;
+    }
+    .bolder {
+      font-size: 25px;
+      font-weight: bolder;
+          margin: 0 100px;
+    }
+  }
+
+  .bju{
+        width: 50%;
+    margin: 30px 25%;
+    border: 1px solid black;
+    
+
+    .title {
+      min-height: 70px;
+      font-size: 30px;
+      text-align: center;
+          padding-top: 10px;
+    }
+
+    .item {
+       min-height: 50px;
+        font-size: 20px;
+            border-top: 1px solid black;
+            padding-top: 7px;
+                padding-left: 30px;
+    }
+
+    .bold {
+      font-size: 25px;
+      font-weight: bold;
+    }
+    .bolder {
+      font-size: 25px;
+      font-weight: bolder;
+          margin: 0 100px;
+          float: right;
+    }
+  }
+
+  //for Sasha
+
+  .positive-preferences {
+    display: none;
+  }
+
+  .client-info {
+    margin-top: 100px;
+}
+
+.results {
+  display: none;
+}
+
+.codemaster-link {
+  display: none;
+}
+
+.ofeel {
+  display: none;
+}
+
+.button-calc {
+  margin-left: 175px;
+  margin-top: 40px;
+}
+
+.calories-wrap {
+  display: none;
+}
+
+.bju{
+  display: none;
+}
+
+.polezn {
+  display: none;
+  text-align: center;
+
+  .ssylc {
+    font-size: 35px;
+  }
+
+  .item {
+    display: block;
+    font-size: 30px;
+  }
+
+  .recept {
+    font-size: 30px;
+  }
+}
+

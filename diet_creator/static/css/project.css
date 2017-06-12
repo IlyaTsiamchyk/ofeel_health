@@ -245,3 +245,86 @@
     padding-bottom: 30px; }
     .footer-wrap .footer-copy span {
       font-size: 0.813em; }
+
+.calories-wrap {
+  width: 50%;
+  margin: 30px 25%;
+  border: 1px solid black; }
+  .calories-wrap .title {
+    min-height: 70px;
+    font-size: 30px;
+    text-align: center;
+    padding-top: 10px; }
+  .calories-wrap .item {
+    min-height: 50px;
+    font-size: 20px;
+    border-top: 1px solid black;
+    padding-top: 7px;
+    padding-left: 30px; }
+  .calories-wrap .bold {
+    font-size: 25px;
+    font-weight: bold; }
+  .calories-wrap .bolder {
+    font-size: 25px;
+    font-weight: bolder;
+    margin: 0 100px; }
+
+.bju {
+  width: 50%;
+  margin: 30px 25%;
+  border: 1px solid black; }
+  .bju .title {
+    min-height: 70px;
+    font-size: 30px;
+    text-align: center;
+    padding-top: 10px; }
+  .bju .item {
+    min-height: 50px;
+    font-size: 20px;
+    border-top: 1px solid black;
+    padding-top: 7px;
+    padding-left: 30px; }
+  .bju .bold {
+    font-size: 25px;
+    font-weight: bold; }
+  .bju .bolder {
+    font-size: 25px;
+    font-weight: bolder;
+    margin: 0 100px;
+    float: right; }
+
+.positive-preferences {
+  display: none; }
+
+.client-info {
+  margin-top: 100px; }
+
+.results {
+  display: none; }
+
+.codemaster-link {
+  display: none; }
+
+.ofeel {
+  display: none; }
+
+.button-calc {
+  margin-left: 175px;
+  margin-top: 40px; }
+
+.calories-wrap {
+  display: none; }
+
+.bju {
+  display: none; }
+
+.polezn {
+  display: none;
+  text-align: center; }
+  .polezn .ssylc {
+    font-size: 35px; }
+  .polezn .item {
+    display: block;
+    font-size: 30px; }
+  .polezn .recept {
+    font-size: 30px; }

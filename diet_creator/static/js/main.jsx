@@ -5,6 +5,7 @@ var Header = require('./header');
 var Preferences = require('./preferences.jsx');
 var ClientInformation = require('./client.information.jsx');
 var MenuResults = require('./menu.results.jsx');
+var Calories = require('./calories.jsx');
 
 var Main = React.createClass ({
     render: function() {
@@ -13,6 +14,7 @@ var Main = React.createClass ({
         		<Header/>
                 <Preferences/>
         		<ClientInformation/>
+        		<Calories/>
         		<MenuResults/>
         		<Footer/>
 	        </div>

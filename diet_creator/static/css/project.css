@@ -293,6 +293,17 @@
     margin: 0 100px;
     float: right; }
 
+body {
+  font-family: 'Open Sans', sans-serif; }
+
+.appbar {
+  background-color: #00bcd4 !important; }
+
+.button-calc {
+  border: 1px solid #00bcd4; }
+  .button-calc span {
+    color: #006875 !important; }
+
 .positive-preferences {
   display: none; }
 
@@ -309,8 +320,7 @@
   display: none; }
 
 .button-calc {
-  margin-left: 175px;
-  margin-top: 40px; }
+  margin: 40px 0 40px 175px; }
 
 .calories-wrap {
   display: none; }

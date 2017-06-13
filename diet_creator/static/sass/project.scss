@@ -440,6 +440,21 @@ $darkred: #49a942;
 
   //for Sasha
 
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+.appbar {
+    background-color: #00bcd4 !important;
+}
+
+.button-calc {
+  border: 1px solid #00bcd4;
+
+  span {
+    color: #006875 !important;
+  }
+}
+
   .positive-preferences {
     display: none;
   }
@@ -461,8 +476,7 @@ $darkred: #49a942;
 }
 
 .button-calc {
-  margin-left: 175px;
-  margin-top: 40px;
+  margin: 40px 0 40px 175px;
 }
 
 .calories-wrap {

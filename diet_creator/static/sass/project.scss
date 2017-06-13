@@ -2,7 +2,7 @@
 // project specific CSS goes here
 
 ////////////////////////////////
-		//Variables//
+    //Variables//
 ////////////////////////////////
 
 // Alert colors
@@ -15,7 +15,7 @@ $dark-pink: #eed3d7;
 $red: #b94a48;
 
 ////////////////////////////////
-		//Alerts//
+    //Alerts//
 ////////////////////////////////
 
 // bootstrap alert CSS, translated to the django-standard levels of
@@ -34,7 +34,7 @@ $red: #b94a48;
 }
 
 ////////////////////////////////
-		//Navbar//
+    //Navbar//
 ////////////////////////////////
 
 // This is a fix for the bootstrap4 alpha release
@@ -100,7 +100,7 @@ $red: #b94a48;
 }
 
 ////////////////////////////////
-		//Django Toolbar//
+    //Django Toolbar//
 ////////////////////////////////
 
 // Display django-debug-toolbar.
@@ -270,25 +270,25 @@ $darkred: #49a942;
   font-weight: lighter;
 
   .footer {
-      display: flex;
-      justify-content: space-between;
-      -webkit-justify-content: space-between;
-      margin-bottom: 23px;
-      padding-top: 30px;
-      border-top: 1px solid #ededed;
+    display: flex;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    margin-bottom: 23px;
+    padding-top: 30px;
+    border-top: 1px solid #ededed;
 
-      .text {
+    .text {
 
-          a {
-              text-decoration: none;
-              color: #777;
-              font-size: 0.875em;
+      a {
+          text-decoration: none;
+          color: #777;
+          font-size: 0.875em;
 
-              &:hover {
-                  text-decoration: underline;
-              }
+          &:hover {
+              text-decoration: underline;
           }
       }
+    }
 
       .links {
 
@@ -406,7 +406,7 @@ $darkred: #49a942;
   }
 
   .bju{
-        width: 50%;
+    width: 50%;
     margin: 30px 25%;
     border: 1px solid black;
     
@@ -415,15 +415,15 @@ $darkred: #49a942;
       min-height: 70px;
       font-size: 30px;
       text-align: center;
-          padding-top: 10px;
+      padding-top: 10px;
     }
 
     .item {
-       min-height: 50px;
-        font-size: 20px;
-            border-top: 1px solid black;
-            padding-top: 7px;
-                padding-left: 30px;
+      min-height: 50px;
+      font-size: 20px;
+      border-top: 1px solid black;
+      padding-top: 7px;
+      padding-left: 30px;
     }
 
     .bold {
@@ -433,19 +433,34 @@ $darkred: #49a942;
     .bolder {
       font-size: 25px;
       font-weight: bolder;
-          margin: 0 100px;
-          float: right;
+      margin: 0 100px;
+      float: right;
     }
   }
 
-  //for Sasha
+//for Sasha
 
-  .positive-preferences {
-    display: none;
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+.appbar {
+  background-color: #00bcd4 !important;
+}
+
+.button-calc {
+  border: 1px solid #00bcd4;
+
+  span {
+    color: #006875 !important;
   }
+}
 
-  .client-info {
-    margin-top: 100px;
+.positive-preferences {
+  display: none;
+}
+
+.client-info {
+  margin-top: 100px;
 }
 
 .results {
@@ -461,15 +476,14 @@ $darkred: #49a942;
 }
 
 .button-calc {
-  margin-left: 175px;
-  margin-top: 40px;
+  margin: 40px 0 40px 175px;
 }
 
 .calories-wrap {
   display: none;
 }
 
-.bju{
+.bju {
   display: none;
 }
 

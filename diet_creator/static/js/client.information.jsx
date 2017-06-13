@@ -7,6 +7,8 @@ var injectTapEventPlugin = require("react-tap-event-plugin");
 injectTapEventPlugin();
 var TextField = require('material-ui/TextField').default;
 var DatePicker = require('material-ui/DatePicker').default;
+var SelectField = require('material-ui/SelectField').default;
+var MenuItem = require('material-ui/MenuItem').default;
 var RaisedButton = require('material-ui/RaisedButton').default;
 var MuiThemeProvider = require('material-ui/styles/MuiThemeProvider').default;
 
@@ -15,11 +17,12 @@ var ClientInformation = React.createClass({
 	getInitialState: function() {
 		return {
 			name: 'Anonymous',
-			sex: 'men',
+			sex: 1,
 			height: 165,
 			weight: 55,
 			intestinalParameters: 1,
-			foodMode: 'Low-carb',
+			foodMode: 3,
+			activity: 2,
 			dateBirth: this.getDate()
 		};
 	},
@@ -32,10 +35,8 @@ var ClientInformation = React.createClass({
 	},
 
 	setValue: function (field, event) {
-		console.log(this.state);
 		var object = {};
 		object[field] = event.target.value;
-		console.log(object);
 		this.setState(object);
 	},
 
@@ -43,6 +44,18 @@ var ClientInformation = React.createClass({
 		var href = window.location.href;
 		var url = href + '/ofeel/rest';
 		return url;
+	},
+
+	handleChangeDate: function (event, value) {
+		var object = {};
+		object['dateBirth'] = value;
+		this.setState(object);
+	},
+
+	handleChange: function (event, index, id, value) {
+		var object = {};
+		object[event] = value;
+		this.setState(object);
 	},
 
 	// onGetMenuButtonClick: function (e) {
@@ -75,7 +88,7 @@ var ClientInformation = React.createClass({
 		var minCal = 0.75*avCal;
 		var maxCal = 1.25*avCal;
 		var diff = Math.round(0.25*avCal);
-		var proc = 'Разброс: ±25% (' + diff + 'ккал)';
+		var proc = 'Scatter: ±25% (' + diff + ' Kcal)';
 
 		var bel = 60+60*weight/200-age/60;
 		var jivotbelc = 0.6*bel;
@@ -98,26 +111,23 @@ var ClientInformation = React.createClass({
 		$('.bju .jir').text(Math.round(jir * 100) / 100);
 		$('.bju .uglev').text(Math.round(uglev * 100) / 100);
 
-		console.log(weight);
-		console.log(height);
-		console.log(age);
-		console.log(avCal);
-		var url = this.getUrl();
-		var obj = this.state;
-		$.ajax({
-			url: url,
-			dataType: 'json',
-			type: 'POST',
-			data: obj,
-			success: function(data) {
-				console.log('succ');
-				// this.setState({data: data});
-			}.bind(this),
-			error: function(xhr, status, err) {
-				console.error(this.props.url, status, err.toString());
-			}.bind(this)
-		});
+		// var url = this.getUrl();
+		// var obj = this.state;
+		// $.ajax({
+		// 	url: url,
+		// 	dataType: 'json',
+		// 	type: 'POST',
+		// 	data: obj,
+		// 	success: function(data) {
+		// 		console.log('succ');
+		// 		// this.setState({data: data});
+		// 	}.bind(this),
+		// 	error: function(xhr, status, err) {
+		// 		console.error(this.props.url, status, err.toString());
+		// 	}.bind(this)
+		// });
 	},
+	
 
 	getInputs: function() {
 
@@ -130,7 +140,7 @@ var ClientInformation = React.createClass({
 							<TextField 
 							id="0" 
 							className="client-name"  
-							defaultValue="here..."
+							hintText="here..."
 							onChange={this.setValue.bind(this, 'name')}/>
 						</MuiThemeProvider>
 					</div>
@@ -138,15 +148,19 @@ var ClientInformation = React.createClass({
 						Enter your sex:
 						<br/>
 						<MuiThemeProvider>
-							<TextField 
-							id="1" 
-							className="client-sex"  
-							defaultValue="men"
-							onChange={this.setValue.bind(this, 'sex')}/>
+							<SelectField
+								id="1" 
+								className="client-sex" 
+								value={this.state.sex}
+								onChange={this.handleChange.bind(this, 'sex')}
+								>
+								<MenuItem value={1} id="111" primaryText="Men" />
+								<MenuItem value={2} id="121" primaryText="Women" />
+							</SelectField>
 						</MuiThemeProvider>
 					</div>
 					<div className="client-height-wrap">
-						Enter your height(sm):
+						Enter your height (sm):
 						<br/>
 						<MuiThemeProvider>
 							<TextField 
@@ -157,7 +171,7 @@ var ClientInformation = React.createClass({
 						</MuiThemeProvider>
 					</div>
 					<div className="client-weight-wrap">
-						Enter your weight(kg):
+						Enter your weight (kg):
 						<br/>
 						<MuiThemeProvider>
 							<TextField 
@@ -174,18 +188,40 @@ var ClientInformation = React.createClass({
 							className="client-date-birth"
 							defaultDate={this.state.dateBirth}
 							mode="landscape" 
-							onChange={this.setValue.bind(this, 'dateBirth')}/>
+							onChange={this.handleChangeDate}/>
+						</MuiThemeProvider>
+					</div>
+					<div className="physical-activity-wrap">
+						Choose your physical activity:
+						<br/>
+						<MuiThemeProvider>
+							<SelectField
+								id="4" 
+								className="client-activity" 
+								value={this.state.activity}
+								onChange={this.handleChange.bind(this, 'activity')}
+								>
+								<MenuItem value={1} id="11" primaryText="Hight" />
+								<MenuItem value={2} id="12" primaryText="Average" />
+								<MenuItem value={3} id="13" primaryText="Low" />
+							</SelectField>
 						</MuiThemeProvider>
 					</div>
 					<div className="foodMode-wrap">
 						Choose your food mode:
 						<br/>
 						<MuiThemeProvider>
-							<TextField 
-							id="4" 
-							className="client-diet" 
-							defaultValue="Low-carb"
-							onChange={this.setValue.bind(this, 'foodMode')}/>
+							<SelectField
+								id="5" 
+								className="client-diet" 
+								value={this.state.foodMode}
+								onChange={this.handleChange.bind(this, 'foodMode')}
+								>
+								<MenuItem value={1} id="211" primaryText="Low-carb" />
+								<MenuItem value={2} id="212" primaryText="Low-fat" /> 
+								<MenuItem value={3} id="213" primaryText="Normal" />
+								<MenuItem value={4} id="214" primaryText="Low-calorie" />
+							</SelectField>
 						</MuiThemeProvider>
 					</div>
 					<div className="intestinal-parameters-wrap">
@@ -193,7 +229,7 @@ var ClientInformation = React.createClass({
 						<br/>
 						<MuiThemeProvider>
 							<TextField 
-							id="5" 
+							id="6" 
 							className="client-intestinal-parameters" 
 							defaultValue="1"
 							onChange={this.setValue.bind(this, 'intestinalParameters')}/>

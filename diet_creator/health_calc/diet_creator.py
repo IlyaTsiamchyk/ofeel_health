@@ -15,12 +15,15 @@ def create_diet(dishes, food_types, body_features, dishes_compabilities):
     AVERAGE_BODY_REQUIREMENTS = get_body_requirements(body_features)
     left_body_requirements = copy.copy(AVERAGE_BODY_REQUIREMENTS)
 
-    requirements_weights = get_requirements_weights(AVERAGE_BODY_REQUIREMENTS, left_body_requirements)
-    dish_to_eat = get_dish(dishes, requirements_weights, dishes_compabilities, previous_dish)
+    for i in range(3): 
+        requirements_weights = get_requirements_weights(AVERAGE_BODY_REQUIREMENTS, left_body_requirements)
+        dish_to_eat = get_dish(dishes, requirements_weights, dishes_compabilities, previous_dish)
     
-    diet.append(dish_to_eat)
-    freese_dishes.append(dish_to_eat)
-    update_weights()
+        diet.append(dish_to_eat)
+        freese_dishes.append(dish_to_eat)
+        previous_dish = dish_to_eat
+
+        update_weights()
 
     return diet
 
@@ -49,11 +52,13 @@ def get_requirements_weights(average_requirements, requirements):
 def get_dish(dishes, requirements_weights, dishes_compabilities, previous_dish):    
     sutisfied_dishes = find_most_required_dishes(dishes, requirements_weights)
     
-    values = []
+    values = {}
     weights = []
 
     for i in range(len(sutisfied_dishes)):
-        values.append((i, get_dish_value(sutisfied_dishes[i], requirements_weights)))
+        compability = [el.value for el in dishes_compabilities if el.first_dish == previous_dish and el.second_dish == sutisfied_dishes[i]]
+        dish_value = get_dish_value(sutisfied_dishes[i], requirements_weights) * (compability[0] / 50 if compability else 1)
+        values[i] = dish_value
 
     dish_number = weighted_choice(values)
 
@@ -80,10 +85,10 @@ def get_dish_value(dish, requirements_weights):
 
 
 def weighted_choice(choices):
-   total = sum(w for c, w in choices)
+   total = sum(choices.values())
    r = random.uniform(0, total)
    upto = 0
-   for c, w in choices:
+   for c, w in choices.items():
       if upto + w >= r:
          return c
       upto += w

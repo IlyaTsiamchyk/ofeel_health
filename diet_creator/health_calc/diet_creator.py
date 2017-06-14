@@ -1,18 +1,35 @@
 ﻿import copy
 import operator
 import random
+from datetime import datetime
+from enum import Enum
 
 VALUE_WEIGHTS = {
     'proteins': 1.2
 }
 
+ACTIVITY_MULTIPLIERS = {
+    'bmr' : 1, #basal_metabolic_rate
+    'sedentary' : 1.2, #little or no exercise
+    'lightly_active' : 1.375, #exercise/sports 1-3 times/week
+    'moderatetely_active' : 1.55, #exercise/sports 3-5 times/week
+    'very_active' : 1.725, #hard exercise/sports 6-7 times/week
+    'extra_active' : 1.9, #very hard exercise/sports or physical job
+}
 
-def create_diet(dishes, food_types, body_features, dishes_compabilities):
+class Food_modes(Enum):
+    NORMAL = 1
+    LOW_CARB = 2
+    LOW_FAT = 3
+    LOW_CALORIE = 4
+
+
+def create_diet(dishes, food_types, client_info, dishes_compabilities=[], dishes_pheromones=[]):
     diet = []
     freese_dishes = []
     previous_dish = None
     
-    AVERAGE_BODY_REQUIREMENTS = get_body_requirements(body_features)
+    AVERAGE_BODY_REQUIREMENTS = get_body_requirements(client_info)
     left_body_requirements = copy.copy(AVERAGE_BODY_REQUIREMENTS)
 
     for i in range(3): 
@@ -26,18 +43,6 @@ def create_diet(dishes, food_types, body_features, dishes_compabilities):
         update_weights()
 
     return diet
-
-
-def get_body_requirements(body_features):
-    BODY_REQUIREMENTS = {
-        'proteins': 100,
-        'lipids': 100,
-        'carbohydrates': 100,
-        'energy': 1000
-    }
-    #TODO: add personal height etc counting
-
-    return BODY_REQUIREMENTS
 
 
 def get_requirements_weights(average_requirements, requirements):
@@ -97,3 +102,37 @@ def weighted_choice(choices):
 
 def update_weights():
     pass
+    
+
+def get_body_requirements(client_info):
+    carbohydrates_percent, lipids_percent, proteins_percent = get_carb_fat_protein_percents(Food_modes(client_info['foodMode']))
+    
+    calorie_in_carbohydrates_gram = 3.758   
+    calorie_in_lipids_gram = 8.817
+    calorie_in_proteins_gram = 4.06
+
+    weight = client_info['weight']
+    height = client_info['height']
+    age = datetime.now().year - datetime.strptime(client_info['birth_date'][:4], "%Y").year
+
+    BODY_REQUIREMENTS = {}
+
+    BODY_REQUIREMENTS['energy'] = 10 * weight + 6.25 * height - 5 * age + 5
+    BODY_REQUIREMENTS['proteins'] = BODY_REQUIREMENTS['energy'] / calorie_in_proteins_gram * proteins_percent / 100 #1.4 * weight #0.8-1.8 gram/kg of body weight or 10%-35% of calories
+    BODY_REQUIREMENTS['carbohydrates'] = BODY_REQUIREMENTS['energy'] / calorie_in_carbohydrates_gram * carbohydrates_percent / 100
+    BODY_REQUIREMENTS['lipids'] = BODY_REQUIREMENTS['energy'] / calorie_in_lipids_gram * lipids_percent / 100
+
+    return BODY_REQUIREMENTS
+
+def get_carb_fat_protein_percents(food_mode):    
+    carbohydrates_percent = 50 #from 40 to 75 % of calories
+    lipids_percent = 30 #from 20 to 35 % of calories
+    proteins_percent = 20 #10%-35% of calories
+
+    switcher = {
+        Food_modes.NORMAL : (53, 27, 20),
+        Food_modes.LOW_CARB : (40, 32, 28),
+        Food_modes.LOW_FAT : (50, 20, 30)
+    }
+
+    return switcher[food_mode]

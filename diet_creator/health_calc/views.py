@@ -4,10 +4,10 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, renderer_classes, permission_classes
 from django.shortcuts import get_object_or_404, render, get_list_or_404
-from django.utils import timezone
+from datetime import datetime, timedelta
 
 from diet_creator.health_calc.serializers import FoodTypeSerializer, FoodCategorySerializer
-from diet_creator.health_calc.models import Dish, FoodType, FoodCategory, DishesCompabilities
+from diet_creator.health_calc.models import Dish, FoodType, FoodCategory, DishesCompabilities, DishesPheromones
 from diet_creator.health_calc.diet_creator import *
 
 class TypeViewSet(viewsets.ModelViewSet):
@@ -32,9 +32,10 @@ def rest(request, format=None):
 
     db_dishes = list(get_list_or_404(Dish, food_type__name = data['type']))
     dishes_compabilities = list(DishesCompabilities.objects.all())
+    dishes_pheromones = list(DishesPheromones.objects.all())
     # dishes = json.dumps([dish.name for dish in db_dishes])
 
-    result_dishes = create_diet(db_dishes, 0, data['bodyInfo'], dishes_compabilities)
+    result_dishes = create_diet(db_dishes, 0, data['clientInfo'], dishes_compabilities, dishes_pheromones)
     serialized_dishes = [dish.name for dish in result_dishes]
 
     return Response({'dishes': json.dumps(serialized_dishes)})
@@ -45,16 +46,23 @@ def getTestJson():
     data['type'] = "raw"
     data['positivePreferencies'] = [("dill", 2), ("parsley", 4)]
     data['negativePreferencies'] = [("parsley", 3)]
-    data['bodyInfo'] = getTestBodyInfo()
+    data['clientInfo'] = getTestClientInfo()
 
     return json.dumps(data)
 
-def getTestBodyInfo():
+def getTestClientInfo():
+    years = 25
+    days_per_year = 365.24
+
     data = {}
 
+    data['name'] = "Test"
     data['height'] = 170
     data['weight'] = 60
     data['sex'] = 0
-    data['birth_date'] = str(timezone.now())
+    data['birth_date'] = str(datetime.now() - timedelta(days=(years*days_per_year)))
+    data['foodMode'] = 1
+    data['intestinalParameters'] = 1
+    data['activity'] = 1
 
     return data

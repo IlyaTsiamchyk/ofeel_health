@@ -4,13 +4,14 @@ var React = require('react');
 
 var Category = React.createClass({
 
-	onCategoryCardClick: function () {
-		alert(this.props.name);				
-	},
-
 	render: function () {
+		var classN = 'category ' + this.props.isClicked;
 		return (
-			<div className="category" onClick={this.onCategoryCardClick}>{this.props.name}</div>
+			<div className={classN} onClick={this.props.onClick}>{this.props.name}
+				<div className="overlay">
+					<p> {this.props.isClicked} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, illo?</p>
+				</div>
+			</div>
 		);
 	}
 });

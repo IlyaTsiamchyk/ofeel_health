@@ -57,6 +57,7 @@ $red: #b94a48;
     padding: 90px 0;
     text-align: center;
     font-size: 24px;
+    position: relative;
 }
 
 .add_button {
@@ -505,3 +506,33 @@ body {
   }
 }
 
+// For Tiger
+
+.positive-preferences {
+  display: block;
+}
+
+.category:hover .overlay{
+	display: block;
+}
+
+.category{
+  transition: all 0.3s;
+
+  &.true {
+    background-color: #42860E;
+  }
+
+  .overlay{
+    display:none;
+    position: absolute;
+    background-color: #ffffff;
+    font-weight: 400;
+    color: green;
+    border: 1px solid green;
+    padding: 5px;
+    width: 280px;
+    top: -55px;
+    left: 133px;
+  }
+}

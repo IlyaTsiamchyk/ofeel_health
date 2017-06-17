@@ -67,7 +67,7 @@ var ClientInformation = React.createClass({
 	// 		type: 'POST',
 	// 		data: obj,
 	// 		success: function(data) {
-	// 			console.log('succ');
+	// 			console.log(data);
 	// 			// this.setState({data: data});
 	// 		}.bind(this),
 	// 		error: function(xhr, status, err) {

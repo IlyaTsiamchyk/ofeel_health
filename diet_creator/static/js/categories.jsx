@@ -40,6 +40,8 @@ var Categories = React.createClass({
 		this.setState({
 			category: value
 		})
+
+		this.props.onChangeCategory(value);
 	},
 
 	render: function () {

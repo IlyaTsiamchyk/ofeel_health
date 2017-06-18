@@ -14,6 +14,7 @@ var PositivePreferences = React.createClass({
 			return (
 				<Categories
 					foodArray={foodPreferences}
+					onChangeCategory={this.props.onChangeCategory}
 				/>
 			);
 	},

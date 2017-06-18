@@ -9,7 +9,7 @@ var Category = React.createClass({
 		return (
 			<div className={classN} onClick={this.props.onClick}>{this.props.name}
 				<div className="overlay">
-					<p> {this.props.isClicked} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, illo?</p>
+					<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, illo?</p>
 				</div>
 			</div>
 		);

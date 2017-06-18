@@ -12,17 +12,20 @@ var Categories = React.createClass({
 	},
 
 	getCategory: function() {
-		var foodArray = this.props.foodArray;
+		if (!this.props.categoriesObject) { return;}
+		var categoriesObject = this.props.categoriesObject;
 
-		var Categories = foodArray.map(function(name, index) {
-			var isClicked = name === this.state.category ? true : false;
+		var Categories = categoriesObject.map(function(object, index) {	
+			var isClicked = object.name === this.state.category ? true : false;
 
 			return (
 				<Category
-					name={name}
+					name={object.name}
+					picture={object.picture}
+					description={object.description}
 					isClicked={isClicked}
 					key={index}
-					onClick={this.onCategoryCardClick.bind(null,name)}
+					onClick={this.onCategoryCardClick.bind(null, object.name)}
 				/>
 			);
 		}, this);

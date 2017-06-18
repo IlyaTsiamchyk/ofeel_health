@@ -64,6 +64,8 @@ var ClientInformation = React.createClass({
 
 	onButtonClick: function (e) {
 		this.props.onGetMenuButtonClick(this.state);
+
+		$('.results').show();
 	},
 
 	onGetMenuButtonClick: function (e) {
@@ -217,7 +219,7 @@ var ClientInformation = React.createClass({
 			<div>
 				{this.getInputs()}
 				<MuiThemeProvider>
-					<RaisedButton label="Calculate"
+					<RaisedButton label="Get menu"
 					className="button-calc"
 					onClick={this.onButtonClick}
 					/>

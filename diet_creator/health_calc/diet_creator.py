@@ -34,7 +34,7 @@ def create_diet(dishes, food_types, client_info, dishes_compabilities=[], dishes
     left_body_requirements = copy.copy(AVERAGE_BODY_REQUIREMENTS)
 
     for i in range(7): 
-        requirements_weights = get_requirements_weights(AVERAGE_BODY_REQUIREMENTS, left_body_requirements, i)
+        requirements_weights = get_requirements_weights(AVERAGE_BODY_REQUIREMENTS[i], left_body_requirements[i])
         dish_to_eat = get_dish(dishes, requirements_weights, dishes_compabilities, previous_dish)
     
         diet.append(dish_to_eat)
@@ -46,7 +46,7 @@ def create_diet(dishes, food_types, client_info, dishes_compabilities=[], dishes
     return diet
 
 
-def get_requirements_weights(average_requirements, requirements, day_number):
+def get_requirements_weights(average_requirements, requirements):
     requirements_weights = {}
 
     for key in requirements:
@@ -112,7 +112,7 @@ def get_week_body_requirements(client_info):
     days_multipliers = [1.2, 0.8, 1.2, 0.8, 1.2, 1, 1] #depends on day load
 
     for i in range(7):
-        week_requirements.append([(key, val * days_multipliers[i]) for key, val in day_requirements.items()])
+        week_requirements.append({key: val * days_multipliers[i] for key, val in day_requirements.items()})
         
     return week_requirements
 

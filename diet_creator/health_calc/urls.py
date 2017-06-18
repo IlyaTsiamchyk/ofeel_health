@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 
 from django.conf.urls import url, include
@@ -15,4 +15,5 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^test', views.test, name='test'),
     url(r'^rest/', views.rest, name='rest'),
+    url(r'^get/', views.get, name='get'),
 ]

@@ -25,7 +25,7 @@ def test(request):
 @api_view(['GET'])
 @renderer_classes((JSONRenderer,))
 @permission_classes(())
-def rest(request, format=None):
+def get(request, format=None):
     """A view that returns the week plan in JSON."""
     json_data = getTestJson()
     data = json.loads(json_data)
@@ -39,6 +39,16 @@ def rest(request, format=None):
     serialized_dishes = [dish.name for dish in result_dishes]
 
     return Response({'dishes': json.dumps(serialized_dishes)})
+
+@api_view(['POST'])
+@renderer_classes((JSONRenderer,))
+@permission_classes(())
+def rest(request, format=None):
+    """A view that returns the week plan in JSON."""
+    db_dishes = list(get_list_or_404(Dish))
+    dishes = json.dumps([dish.name for dish in db_dishes])
+
+    return Response({'dishes': json.dumps(dishes)})
 
 def getTestJson():
     data = {}

@@ -1,4 +1,4 @@
-var React = require('react');
+﻿var React = require('react');
 var $ = require('jquery');
 var ReactDOM = require('react-dom');
 var Footer = require('./footer');
@@ -16,7 +16,7 @@ var Main = React.createClass ({
 
 	getUrl: function () {
 		var href = window.location.href;
-		var url = href + '/ofeel/rest';
+		var url = href + 'ofeel/rest/';
 		return url;
 	},
 
@@ -33,13 +33,13 @@ var Main = React.createClass ({
 		this.sendAJAX(data);
 	},
 
-	sendAJAX: function (data) {
+    sendAJAX: function (data) {
 		var url = this.getUrl();
 		$.ajax({
 			url: url,
 			dataType: 'json',
 			type: 'POST',
-			data: data,
+            data: JSON.stringify(data),
 			success: function(data) {
 				console.log(data);
 				// this.setState({data: data});

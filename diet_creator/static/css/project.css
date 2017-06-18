@@ -12,20 +12,59 @@
   border-radius: 0px; }
 
 .appbar {
-  background-color: #00AC6B !important; }
+  background-color: #05cc47 !important; }
 
 .category {
   width: 200px;
+  cursor: pointer;
   height: 200px;
   background-color: #7ac143;
   color: #fff;
   border-radius: 100px;
   float: left;
-  margin: 30px 135px;
+  margin: 30px 110px;
   padding: 90px 0;
   text-align: center;
   font-size: 24px;
   position: relative; }
+  .category.true {
+    background-color: #42860E; }
+  .category .overlay {
+    display: none;
+    position: absolute;
+    font-weight: 400;
+    border: 1px solid green;
+    padding: 15px;
+    width: 280px;
+    top: -35px;
+    left: 182px;
+    z-index: 99;
+    font-size: 16px;
+    border-radius: 10px;
+    background-color: #05cc47;
+    color: white; }
+    .category .overlay p {
+      margin: 0; }
+  .category:hover {
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 2px solid #7ac143; }
+    .category:hover.true {
+      border: 4px solid #42860E; }
+    .category:hover .overlay {
+      display: block; }
+    .category:hover.paleo {
+      background-image: url("./../images/paleo.jpg"); }
+    .category:hover.vegetarian {
+      background-image: url("./../images/vegetarian.jpg"); }
+    .category:hover.vegan {
+      background-image: url("./../images/vegan.jpg"); }
+    .category:hover.gluten {
+      background-image: url("./../images/gluten.jpeg"); }
+    .category:hover.raw {
+      background-image: url("./../images/raw.jpg"); }
+    .category:hover.dukan {
+      background-image: url("./../images/dukan.jpg"); }
 
 .add_button {
   margin: 50px 0 100px 142px; }
@@ -133,7 +172,7 @@
   transform: translate(0%, -50%) rotate(45deg); }
 
 .results .section.open .articlewrap {
-  height: 130px; }
+  height: auto; }
 
 .results .articlewrap {
   height: 0;
@@ -297,24 +336,15 @@
 body {
   font-family: 'Open Sans', sans-serif; }
 
-.appbar {
-  background-color: #00bcd4 !important; }
-
 .button-calc {
   border: 1px solid #00bcd4; }
   .button-calc span {
     color: #006875 !important; }
 
-.positive-preferences {
-  display: none; }
-
 .client-info {
   margin-top: 100px; }
 
 .results {
-  display: none; }
-
-.codemaster-link {
   display: none; }
 
 .ofeel {
@@ -340,24 +370,27 @@ body {
   .polezn .recept {
     font-size: 30px; }
 
-.positive-preferences {
-  display: block; }
+.button-calc {
+  border: 2px solid #8BC34A;
+  margin-left: 590px;
+  margin-bottom: 45px;
+  margin-top: 0px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50% !important; }
+  .button-calc button {
+    width: 145px !important;
+    height: 145px !important;
+    border-radius: 50% !important;
+    top: 2px; }
+    .button-calc button > div > div {
+      width: 150px;
+      height: 150px !important;
+      padding-top: 55px;
+      border-radius: 50% !important; }
+  .button-calc span {
+    color: #05790a !important;
+    font-size: 20px !important; }
 
-.category:hover .overlay {
-  display: block; }
-
-.category {
-  transition: all 0.3s; }
-  .category.true {
-    background-color: #42860E; }
-  .category .overlay {
-    display: none;
-    position: absolute;
-    background-color: #ffffff;
-    font-weight: 400;
-    color: green;
-    border: 1px solid green;
-    padding: 5px;
-    width: 280px;
-    top: -55px;
-    left: 133px; }
+.client-info {
+  display: none; }

@@ -43,21 +43,86 @@ $red: #b94a48;
   border-radius: 0px;
 }
 .appbar {
-  background-color: #00AC6B !important;
+  background-color: #05cc47 !important;
 }
 
 .category {
     width: 200px;
+    cursor: pointer;
     height: 200px;
     background-color: #7ac143;
     color: #fff;
     border-radius: 100px;
     float: left;
-    margin: 30px 135px;
+    margin: 30px 110px;
     padding: 90px 0;
     text-align: center;
     font-size: 24px;
     position: relative;
+    // transition: all 0.3s;
+
+    &.true {
+      background-color: #42860E;
+    }
+
+    .overlay{
+      display:none;
+      position: absolute;
+      font-weight: 400;
+      border: 1px solid green;
+      padding: 15px;
+      width: 280px;
+      top: -35px;
+      left: 182px;
+      z-index: 99;
+      font-size: 16px;
+      border-radius: 10px;
+      background-color: #05cc47;
+      color: white;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    &:hover {
+      background-repeat: no-repeat;
+      background-size: cover;
+      border: 2px solid #7ac143;
+
+      &.true {
+        border: 4px solid #42860E;
+      }
+
+      .overlay{
+        display: block;
+      }
+
+      &.paleo {
+        background-image: url('./../images/paleo.jpg');
+        
+      }
+
+      &.vegetarian {
+         background-image: url('./../images/vegetarian.jpg');
+      }
+
+      &.vegan {
+         background-image: url('./../images/vegan.jpg');
+      }
+
+      &.gluten {
+         background-image: url('./../images/gluten.jpeg');
+      }
+
+      &.raw {
+         background-image: url('./../images/raw.jpg');
+      }
+
+      &.dukan {
+         background-image: url('./../images/dukan.jpg');
+      }
+    } 
 }
 
 .add_button {
@@ -208,7 +273,7 @@ $darkred: #49a942;
       }
     }
     .articlewrap {
-      height: 130px;
+      height: auto;
     }
   }
 
@@ -444,9 +509,9 @@ $darkred: #49a942;
 body {
   font-family: 'Open Sans', sans-serif;
 }
-.appbar {
-  background-color: #00bcd4 !important;
-}
+// .appbar {
+//   background-color: #00bcd4 !important;
+// }
 
 .button-calc {
   border: 1px solid #00bcd4;
@@ -456,9 +521,9 @@ body {
   }
 }
 
-.positive-preferences {
-  display: none;
-}
+// .positive-preferences {
+//   display: none;
+// }
 
 .client-info {
   margin-top: 100px;
@@ -468,9 +533,9 @@ body {
   display: none;
 }
 
-.codemaster-link {
-  display: none;
-}
+// .codemaster-link {
+//   display: none;
+// }
 
 .ofeel {
   display: none;
@@ -508,31 +573,39 @@ body {
 
 // For Tiger
 
-.positive-preferences {
-  display: block;
+.button-calc {
+  border: 2px solid #8BC34A;
+  margin-left: 590px;
+  margin-bottom: 45px;
+  margin-top: 0px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50% !important;
+
+    button {
+      width: 145px !important;
+      height: 145px !important;
+      border-radius: 50% !important;
+      top: 2px;
+
+      &>div {
+        &>div {
+          width: 150px;
+          height: 150px !important;
+          padding-top: 55px;
+          border-radius: 50% !important;
+        }
+      }
+
+    }
+
+  span {
+    color: #05790a !important;
+    
+    font-size: 20px !important;
+  }
 }
 
-.category:hover .overlay{
-	display: block;
-}
-
-.category{
-  transition: all 0.3s;
-
-  &.true {
-    background-color: #42860E;
-  }
-
-  .overlay{
-    display:none;
-    position: absolute;
-    background-color: #ffffff;
-    font-weight: 400;
-    color: green;
-    border: 1px solid green;
-    padding: 5px;
-    width: 280px;
-    top: -55px;
-    left: 133px;
-  }
+.client-info {
+  display: none;
 }

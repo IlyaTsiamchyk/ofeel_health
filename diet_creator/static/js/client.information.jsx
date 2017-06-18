@@ -27,6 +27,10 @@ var ClientInformation = React.createClass({
 		};
 	},
 
+	componentWillMount: function () {
+		this.category = false;
+	},
+
 	getDate: function () {
 		var date = new Date();
 		date.setYear(1995);
@@ -58,23 +62,9 @@ var ClientInformation = React.createClass({
 		this.setState(object);
 	},
 
-	// onGetMenuButtonClick: function (e) {
-	// 	var url = this.getUrl();
-	// 	var obj = this.state;
-	// 	$.ajax({
-	// 		url: url,
-	// 		dataType: 'json',
-	// 		type: 'POST',
-	// 		data: obj,
-	// 		success: function(data) {
-	// 			console.log('succ');
-	// 			// this.setState({data: data});
-	// 		}.bind(this),
-	// 		error: function(xhr, status, err) {
-	// 			console.error(this.props.url, status, err.toString());
-	// 		}.bind(this)
-	// 	});
-	// },
+	onButtonClick: function (e) {
+		this.props.onGetMenuButtonClick(this.state);
+	},
 
 	onGetMenuButtonClick: function (e) {
 		var d = new Date();
@@ -110,24 +100,7 @@ var ClientInformation = React.createClass({
 		$('.bju .jivotbelc').text(Math.round(jivotbelc * 100) / 100);
 		$('.bju .jir').text(Math.round(jir * 100) / 100);
 		$('.bju .uglev').text(Math.round(uglev * 100) / 100);
-
-		// var url = this.getUrl();
-		// var obj = this.state;
-		// $.ajax({
-		// 	url: url,
-		// 	dataType: 'json',
-		// 	type: 'POST',
-		// 	data: obj,
-		// 	success: function(data) {
-		// 		console.log('succ');
-		// 		// this.setState({data: data});
-		// 	}.bind(this),
-		// 	error: function(xhr, status, err) {
-		// 		console.error(this.props.url, status, err.toString());
-		// 	}.bind(this)
-		// });
 	},
-	
 
 	getInputs: function() {
 
@@ -246,7 +219,7 @@ var ClientInformation = React.createClass({
 				<MuiThemeProvider>
 					<RaisedButton label="Calculate"
 					className="button-calc"
-					onClick={this.onGetMenuButtonClick}
+					onClick={this.onButtonClick}
 					/>
 				</MuiThemeProvider>
 			</div>

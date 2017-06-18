@@ -24,7 +24,8 @@
   margin: 30px 135px;
   padding: 90px 0;
   text-align: center;
-  font-size: 24px; }
+  font-size: 24px;
+  position: relative; }
 
 .add_button {
   margin: 50px 0 100px 142px; }
@@ -338,3 +339,25 @@ body {
     font-size: 30px; }
   .polezn .recept {
     font-size: 30px; }
+
+.positive-preferences {
+  display: block; }
+
+.category:hover .overlay {
+  display: block; }
+
+.category {
+  transition: all 0.3s; }
+  .category.true {
+    background-color: #42860E; }
+  .category .overlay {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    font-weight: 400;
+    color: green;
+    border: 1px solid green;
+    padding: 5px;
+    width: 280px;
+    top: -55px;
+    left: 133px; }

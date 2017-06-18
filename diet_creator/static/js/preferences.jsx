@@ -9,7 +9,7 @@ var Preferences = React.createClass({
 	render: function () {
 		return (
 			<div>
-				<PositivePreferences/>
+				<PositivePreferences onChangeCategory={this.props.onChangeCategory}/>
         		<NegativePreferences/>
 			</div>
 		);
